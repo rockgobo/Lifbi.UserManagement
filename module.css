@@ -1,0 +1,124 @@
+#view h3, #view h2 {
+    margin-top: 0px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border-bottom: 1px solid #1e90ff;
+}
+#view h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#view .profile {
+    margin-right: 20px; 
+}
+
+#view .profile table, tbody{
+    width: 100%;
+}
+#view .profile .dnnFormItem input, 
+#view .profile .dnnFormItem textarea{
+    width: 100%; 
+    max-width: none;
+    margin-bottom: 2px;
+}
+
+#view .groupusers {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#view ul.usergroup
+{
+    margin-left: 0px;
+}
+
+table.usergroup  {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#view .usergroup th.sortable {
+    cursor: pointer;
+}
+
+#view .description {
+    font-size: 10pt;
+    margin-bottom: 10px;
+}
+
+.usergroup tr:hover{
+    background-color: #fffacd;
+}
+
+#view .popup {
+    padding: 20px;
+    background-color: white;
+    margin-bottom: 20px;
+    margin-right: 7px;
+    width: 400px;
+    z-index: 1000;
+    position: absolute;
+    right: 0px;
+    box-shadow: -5px 5px 5px #666;
+    border-left: 10px solid #fffacd;
+    border-right: 10px solid #fffacd;
+    border-bottom: 10px solid #fffacd;
+
+}
+#view .popup textarea {
+    margin-bottom: 10px;
+    font-size: 10pt;
+}
+
+
+.userfields input{
+    border: 1px solid #ffffff;
+    padding: 2px;
+    margin: 0px;
+    width: 100%;
+}
+
+.userfields input:hover {
+    border: 1px solid #CCCCCC;
+}
+
+.usergroup td.label, .profile td.label {
+    width: 110px;
+    text-align: right;
+    font-weight: bold;
+    padding-right: 5px;
+    vertical-align: top;
+}
+
+.usergroup tr.user {
+    cursor: n-resize;
+}
+
+.newuser {
+    background-color: #fffacd;
+    padding: 10px;
+}
+
+.newuser .label{
+    background-color: transparent;
+}
+.usergroup a:hover {
+    cursor: pointer;
+}
+
+#view .details textarea {
+    width: 100%;
+}
+
+#view tr.selected, #view tr.selected td {
+    background-color: #fffacd;
+}
+#view .actions {
+    margin-top: 25px;
+}
+
+#view input.empty {
+    background-color: #FFDDDD;
+    border: 1px solid #CC9999;
+}

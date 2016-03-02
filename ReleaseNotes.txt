@@ -1,0 +1,61 @@
+﻿<h3>Lifbi.UserManagement</h3>
+<p class="Contributor">
+	Christian Matyas <br />
+	<a href="mailto:christian.matyas@lifbi.de">christian.matyas@lifbi.de</a><br />
+	<a href=https://www.lifbi.de>www.lifbi.de</a><br />
+</p>
+<hr/>
+<div class="License">
+
+	<h3>About the Lifbi.UserManagement</h3>
+	
+	<p class="Owner">
+		<b>Version 1.0.8</b>
+	</p>
+	<p>Bugfix: Can save user</p>
+
+	<p class="Owner">
+		<b>Version 1.0.5</b>
+	</p>
+	<p>User management</p>
+
+	<p class="Owner">
+		<b>Version 1.0.3</b>
+	</p>
+	<p>Exchanged popup if user is removed with a usefull dialog</p>
+
+	<p class="Owner">
+		<b>Version 1.0.2</b>
+	</p>
+	<p>Changed GUI to german</p>
+	<p>Displays short description from database</p>
+
+	<p class="Owner">
+		<b>Version 1.0.1</b>
+	</p>
+	<p>Minor Bugfixes</p>
+	<p>Sortable user tables</p>
+
+	<p class="Owner">
+		<b>Version 1.0.0</b>
+	</p>
+	<p>Full feature version</p>
+
+	<p class="Owner">
+		<b>Version 0.0.5</b>
+	</p>
+	<p>Added features to add, remove, disable users</p>
+	<p>Minor UI changes</p>
+
+	<p class="Owner">
+		<b>Version 0.0.3</b>
+	</p>
+	<p>Changed label css class</p>
+	<p>Removed back in the warning: no responsible list found</p>
+
+	<p class="Owner">
+		<b>Version 0.0.2</b>
+	</p>
+	<p>Added most of the frontend features.</p>
+	
+</div>
