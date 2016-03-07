@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="Lifbi.UserManagement" type="Module" version="01.01.01">
+    <package name="Lifbi.UserManagement" type="Module" version="01.01.02">
       <friendlyName>Lifbi.UserManagement</friendlyName>
       <description>Lifbi UserManagement module</description>
       <iconFile>Images/icon_extensions.gif</iconFile>
