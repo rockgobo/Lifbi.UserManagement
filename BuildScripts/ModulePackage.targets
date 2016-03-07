@@ -23,8 +23,10 @@
       <InstallInclude Include="**\*.resx" Exclude="packages\**" />
       <InstallInclude Include="**\*.aspx" Exclude="packages\**" />
       <InstallInclude Include="**\*.js" Exclude="packages\**" />
+      <InstallInclude Include="**\*.woff" Exclude="packages\**" />
       <InstallInclude Include="**\*.txt"  Exclude="**\obj\**;**\_ReSharper*\**;packages\**;" />
       <InstallInclude Include="**\images\**" Exclude="packages\**" />
+      <InstallInclude Include="**\img\**" Exclude="packages\**" />
       
     </ItemGroup>
 

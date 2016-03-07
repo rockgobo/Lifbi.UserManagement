@@ -17,6 +17,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Localization;
 using Neps.Security;
+using DotNetNuke.Common.Utilities;
 
 namespace Christoc.Modules.Lifbi.UserManagement
 {
@@ -41,8 +42,11 @@ namespace Christoc.Modules.Lifbi.UserManagement
             {
                 //Scripts
                 DotNetNuke.Framework.jQuery.RequestRegistration();
+                Page.ClientScript.RegisterClientScriptInclude("tinymce.min.js", this.ControlPath + "js/tinymce/tinymce.min.js");
                 Page.ClientScript.RegisterClientScriptInclude("knockout.js", this.ControlPath + "js/knockout-3.0.0.js");
                 Page.ClientScript.RegisterClientScriptInclude("knockout.mapping.js", this.ControlPath + "js/knockout.mapping-latest.js");
+                Page.ClientScript.RegisterClientScriptInclude("wysiwyg.binding.js", this.ControlPath + "js/wysiwyg.binding.js");
+                Page.ClientScript.RegisterClientScriptInclude("knockout-file-bindings.js", this.ControlPath + "js/knockout-file-bindings.js");
                 Page.ClientScript.RegisterClientScriptInclude("json2.js", this.ControlPath + "js/json2.js");
                 Page.ClientScript.RegisterClientScriptInclude("neps.studydesignchanges.viewmodel", this.ControlPath + "js/viewmodels/lifbi.users.viewmodel.js");
                 
@@ -119,20 +123,11 @@ namespace Christoc.Modules.Lifbi.UserManagement
         }
 
         //User logged in?
-        public string ProfileImage
+        public string ImagePath
         {
             get
             {
-                return this.UserInfo.Profile.PhotoURL;
-            }
-        }
-
-        //User logged in?
-        public string ProfileBiography
-        {
-            get
-            {
-                return this.UserInfo.Profile.Biography;
+                return ApplicationAbsolutePath + Page.ResolveUrl("~/UserImages/");
             }
         }
 

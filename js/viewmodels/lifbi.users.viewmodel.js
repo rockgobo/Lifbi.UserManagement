@@ -4,7 +4,7 @@
     self.serviceUsers = handlerPath + "Users/";
     self.groups = ko.observableArray([]);
 
-    self.Loading = ko.observable(true);
+    self.Loading = ko.observable(false);
 
     self.isLoggedOut = ko.computed(function() { return self.authKey == ''; });
     self.isNotResponsible = ko.computed(function() { return !self.isLoggedOut() && self.groups().length == 0 && !self.Loading(); });
@@ -13,11 +13,29 @@
 
     self.User = ko.observable();
     self.ImagePath = ko.observable(imagePath);
-    
+    self.Comment = ko.observable("");
+
+    self.editMode = ko.observable(false);
+
+    /*************************
+    *      Image
+    **************************/
+    self.fileData = ko.observable({
+        dataURL: ko.observable()
+    });
+    self.onClear = function (fileData) {
+        fileData.clear && fileData.clear();
+    };
+
+    self.fileData().dataURL.subscribe(function (dataURL) {
+        // dataURL has changed do something with it!
+    });
+
     /***********************************************************
     *                           LOADER
     ************************************************************/
     self.loadUser = function () {
+        if (!self.authKey){ return };
         self.Loading(true);
         $.ajax({
             type: 'POST',
@@ -41,28 +59,44 @@
         );
     };
 
-    self.loadUsers = function () {
-        self.Loading(true);
+    /***********************************************************
+    *                           Save
+    ************************************************************/
+    self.Save = function () {
+        var user = self.User();
+        var imageData = self.fileData().dataURL();
+        imageData = imageData == undefined ? '' : imageData;
+
         $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                url: self.serviceUsers + "GetUsersByResponsible/",
-                data: { AuthKey: self.authKey },
-                success: function(data) {
-                    self.groups = ko.mapping.fromJS(data, mapping, self.groups);
-                    self.Loading(false);
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    self.Loading(false);
-                    var err = jqXHR.responseText;
-                    if (err) {
-                        self.Warning(err.replace(/"/g, ''));
-                    } else {
-                        self.Warning("Unknown server error.");
+            type: 'POST',
+            dataType: 'json',
+            url: apiPath + "Users/SaveUser/",
+            data: {
+                AuthKey: auth_key,
+                User: ko.mapping.toJSON(user),
+                ImageData: imageData
+            },
+            success: function (data) {
+                if (data.ResultCode == -1) {
+                    self.Comment("Alert: User could not be saved");
+                }
+                else {
+                    self.Comment("User saved");
+                    if (imageData) {
+                        $("#profile").attr("src", imageData)
+                        $("#profile_new").attr("src", "")
                     }
                 }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                var err = jqXHR.responseText;
+                if (err)
+                    alert(err.replace(/"/g, ''));
+                else
+                    alert("Unknown server error.");
             }
-        );
+        }
+       );
     };
 };
 
@@ -176,107 +210,26 @@ var GroupModel = function(data) {
     self.OrderByLastName();
 };
 
+String.prototype.replaceAll = function (search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+
 var UserModel = function(data) {
     var self = this;
 
     ko.mapping.fromJS(data, {}, self);
-
-    self.New = ko.observable(data.New ? true : false);
-    self.RequestComment = ko.observable("");
-
-    self.OldTitle = ko.observable(data.Title);
-    self.OldFirstName = ko.observable(data.FirstName);
-    self.OldLastName = ko.observable(data.LastName);
-    self.OldEmail = ko.observable(data.Email);
-
-    self.OldStreet = ko.observable(data.Street);
-    self.OldStreetNr = ko.observable(data.StreetNr);
-    self.OldZip = ko.observable(data.Zip);
-    self.OldCity = ko.observable(data.City);
-    self.OldPhone = ko.observable(data.Phone);
-
+        
     self.RowVersion = null;
 
-    self.ShowDetails = ko.observable(false);
-    self.ToggleDetails = function () {
-        self.ShowDetails(!self.ShowDetails());
-    };
-
     self.HasChanged = ko.computed(function () {
-        return self.OldTitle() != self.Title() || self.OldFirstName() != self.FirstName() || self.OldLastName() != self.LastName() || self.OldEmail() != self.Email() || self.OldStreet() != self.Street() || self.OldStreetNr() != self.StreetNr() || self.OldZip() != self.Zip() || self.OldCity() != self.City() || self.OldPhone() != self.Phone();
+        return true;
     });
 
     self.CanSave = ko.computed(function() {
-        return self.LastName() != "" && self.Email() != "" && self.LastName() != null && self.Email() != null;
+        return true;
     });
 
-    self.Deleted = ko.observable(false);
-
     self.Cancel = function() {
-        self.Title(self.OldTitle());
-        self.FirstName(self.OldFirstName());
-        self.LastName(self.OldLastName());
-        self.Email(self.OldEmail());
-
-        self.Street(self.OldStreet());
-        self.StreetNr(self.OldStreetNr());
-        self.Zip(self.OldZip());
-        self.City(self.OldCity());
-        self.Phone(self.OldPhone());
-    };
-
-    self.ShowRemoveUser = ko.observable(false);
-    self.ToggleRemoveUser = function () {
-        self.ShowRemoveUser(!self.ShowRemoveUser());
-    };
-
-    self.Save = function () {
-        if (!self.HasChanged()) {
-            alert("No changes need to be saved");
-            self.ShowDetails(false);
-            return;
-        }
-
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            url: apiPath +"Users/SaveUser/",
-            data: { AuthKey: auth_key, User: ko.mapping.toJSON(self) },
-            success: function (data) {
-                if (data.ResultCode == 0) {
-                    self.OldTitle(self.Title());
-                    self.OldFirstName(self.FirstName());
-                    self.OldLastName(self.LastName());
-                    self.OldEmail(self.Email());
-
-                    self.OldStreet(self.Street());
-                    self.OldStreetNr(self.StreetNr());
-                    self.OldZip(self.Zip());
-                    self.OldCity(self.City());
-                    self.OldPhone(self.Phone());
-
-                    alert("User successfully saved.");
-
-                    self.ShowDetails(false);
-                }
-                if (data.ResultCode == 4) {
-                    alert("No chances has been saved.");
-                    self.ShowDetails(false);
-                }
-                if (data.ResultCode == -1) {
-                    alert("Error: User could not be saved.");
-                    self.ShowDetails(false);
-                }
-                
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                var err = jqXHR.responseText;
-                if (err)
-                    alert(err.replace(/"/g, ''));
-                else
-                    alert("Unknown server error.");
-            }
-        }
-       );
     };
 };
