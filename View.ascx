@@ -36,7 +36,7 @@
                     <td class="dnnFormItem">
                         <input type="text" data-bind="value: UAMUser.Title, enable: $root.editMode"/>
                     </td>
-                    <td rowspan="4" style="width: 50%; vertical-align: top; text-align: right">
+                    <td rowspan="9" style="width: 50%; vertical-align: top; text-align: right">
                         <img data-bind="attr: {src: $root.ImagePath() +Extensions.Folder() + Extensions.FileName()+'?'+(new Date().getTime())}" style="height: 200px; border-radius: 4px;" id="profile"/>
                         <div id="new_image_container">
                             <input id="fileupload" type="file" name="image" accept="image/*" data-bind="fileInput: $root.fileData, customFileInput: {
@@ -64,30 +64,31 @@
                     <td class="dnnFormItem"><input type="text" data-bind="value: UAMUser.Email,enable: $root.editMode, css:{empty: UAMUser.Email() == ''}"/></td>
                 </tr>
                 <tr>
-                    <td colspan="2">
-                        &nbsp;
-                    </td>
+                    <td class="label">Strasse: </td>
+                    <td class="dnnFormItem"><input type="text" data-bind="value: UAMUser.Street,enable: $root.editMode" /></td>
                 </tr>
-                    <tr class="details">
-                    <td colspan="7">
-                        <table>
-                            <tr>
-                                <td class="label">Strasse: </td><td class="dnnFormItem"><input type="text" data-bind="value: UAMUser.Street,enable: $root.editMode" /></td>
-                                <td class="label">Hausnummer: </td><td class="dnnFormItem"><input type="text" data-bind="value: UAMUser.StreetNr,enable: $root.editMode" /></td>
-                            </tr>
-                            <tr>
-                                <td class="label">Postleitzahl: </td><td class="dnnFormItem"><input type="text" data-bind="value: UAMUser.Zip,enable: $root.editMode" /></td>
-                                <td class="label">Stadt: </td><td class="dnnFormItem"><input type="text" data-bind="value: UAMUser.City,enable: $root.editMode" /></td>
-                            </tr>
-                            <tr>
-                                <td class="label" >Telefon: </td><td colspan="3" class="dnnFormItem"><input type="text" data-bind="value: UAMUser.Phone,enable: $root.editMode" /></td>
-                                </tr>
-                            <tr>
-                                <td class="label" >&nbsp; </td><td colspan="3" class="dnnFormItem" data-bind="text: $root.ExampleTelephone,enable: $root.editMode"></td>
-                            </tr>
-                        </table>
-                    </td>
-               </tr>
+                <tr>
+                    
+                    <td class="label">Hausnummer: </td>
+                    <td class="dnnFormItem"><input type="text" data-bind="value: UAMUser.StreetNr,enable: $root.editMode" /></td>
+                </tr>
+                <tr>
+                    <td class="label">Postleitzahl: </td>
+                    <td class="dnnFormItem"><input type="text" data-bind="value: UAMUser.Zip,enable: $root.editMode" /></td>
+                </tr>
+                <tr>
+                    
+                    <td class="label">Stadt: </td>
+                    <td class="dnnFormItem"><input type="text" data-bind="value: UAMUser.City,enable: $root.editMode" /></td>
+                </tr>
+                <tr>
+                    <td class="label" >Telefon: </td>
+                    <td class="dnnFormItem"><input type="text" data-bind="value: UAMUser.Phone,enable: $root.editMode" /></td>
+                    </tr>
+                <tr>
+                    <td class="label" >&nbsp; </td>
+                    <td  class="dnnFormItem" data-bind="text: $root.ExampleTelephone,enable: $root.editMode"></td>
+                </tr>
                <tr>
                     <td class="label">Biographie:</td> 
                     <td class="dnnFormItem" colspan="2">
